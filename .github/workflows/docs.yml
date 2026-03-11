@@ -1,9 +1,9 @@
-name: Deploy Documentation
+name: Documentation Generator
 
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
 
 permissions:
