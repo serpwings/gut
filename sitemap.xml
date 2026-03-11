@@ -1,119 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://serpwings.com/gut/</loc>
+         <loc>https://gut.serpwings.com/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/architecture/</loc>
+         <loc>https://gut.serpwings.com/architecture/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/configuration/</loc>
+         <loc>https://gut.serpwings.com/configuration/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/installation/</loc>
+         <loc>https://gut.serpwings.com/installation/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/age/</loc>
+         <loc>https://gut.serpwings.com/commands/age/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/alias/</loc>
+         <loc>https://gut.serpwings.com/commands/alias/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/big/</loc>
+         <loc>https://gut.serpwings.com/commands/big/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/bisect/</loc>
+         <loc>https://gut.serpwings.com/commands/bisect/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/blame/</loc>
+         <loc>https://gut.serpwings.com/commands/blame/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/branch/</loc>
+         <loc>https://gut.serpwings.com/commands/branch/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/compare/</loc>
+         <loc>https://gut.serpwings.com/commands/compare/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/history/</loc>
+         <loc>https://gut.serpwings.com/commands/history/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/init/</loc>
+         <loc>https://gut.serpwings.com/commands/init/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/integrate/</loc>
+         <loc>https://gut.serpwings.com/commands/integrate/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/patch/</loc>
+         <loc>https://gut.serpwings.com/commands/patch/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/pr/</loc>
+         <loc>https://gut.serpwings.com/commands/pr/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/protect/</loc>
+         <loc>https://gut.serpwings.com/commands/protect/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/replay/</loc>
+         <loc>https://gut.serpwings.com/commands/replay/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/rescue/</loc>
+         <loc>https://gut.serpwings.com/commands/rescue/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/save/</loc>
+         <loc>https://gut.serpwings.com/commands/save/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/snapshot/</loc>
+         <loc>https://gut.serpwings.com/commands/snapshot/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/stash/</loc>
+         <loc>https://gut.serpwings.com/commands/stash/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/stats/</loc>
+         <loc>https://gut.serpwings.com/commands/stats/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/status/</loc>
+         <loc>https://gut.serpwings.com/commands/status/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/sub/</loc>
+         <loc>https://gut.serpwings.com/commands/sub/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/sync/</loc>
+         <loc>https://gut.serpwings.com/commands/sync/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/tag/</loc>
+         <loc>https://gut.serpwings.com/commands/tag/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/undo/</loc>
+         <loc>https://gut.serpwings.com/commands/undo/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
     <url>
-         <loc>https://serpwings.com/gut/commands/whoops/</loc>
+         <loc>https://gut.serpwings.com/commands/whoops/</loc>
          <lastmod>2026-03-11</lastmod>
     </url>
 </urlset>
