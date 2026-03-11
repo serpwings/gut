@@ -1,0 +1,140 @@
+#!/usr/bin/env bash
+
+# gut - Git with better UX
+# https://github.com/serpwings/gut
+#
+#     gut
+#    
+#     Copyright (C) 2024-2026 Faisal Shahzad <info@serpwings.com>
+#
+# <LICENSE_BLOCK>
+# The contents of this file are subject to the MIT License.
+# You may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# https://opensource.org/licenses/MIT
+# https://github.com/serpwings/gut/blob/main/LICENSE
+#
+# Software distributed under the License is distributed on an "AS IS" basis,
+# WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for the
+# specific language governing rights and limitations under the License.
+# </LICENSE_BLOCK>
+
+# gut - A pure Bash wrapper around Git with a better UX.
+# Version: 0.1.0
+
+set -e
+
+# Base directory for the gut installation
+GUT_HOME="$(cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")" && pwd)"
+BIN_DIR="${GUT_HOME}/bin"
+LIB_DIR="${GUT_HOME}/lib"
+
+# Load utilities
+source "${LIB_DIR}/utils.sh"
+
+# Map subcommand to library file (bash 3.2 compatible)
+gut_cmd_to_lib() {
+    case "$1" in
+        init)      echo "init.sh" ;;
+        status)    echo "status.sh" ;;
+        save)      echo "save.sh" ;;
+        undo)      echo "undo.sh" ;;
+        sync)      echo "sync.sh" ;;
+        branch)    echo "branch.sh" ;;
+        switch)    echo "branch.sh" ;;
+        integrate) echo "integrate.sh" ;;
+        replay)    echo "replay.sh" ;;
+        sub)       echo "sub.sh" ;;
+        big)       echo "big.sh" ;;
+        rescue)    echo "rescue.sh" ;;
+        history)   echo "status.sh" ;;
+        stash)     echo "stash.sh" ;;
+        alias)     echo "alias.sh" ;;
+        compare)   echo "compare.sh" ;;
+        tag)       echo "tag.sh" ;;
+        protect)   echo "protect.sh" ;;
+        snapshot)  echo "snapshot.sh" ;;
+        whoops)    echo "whoops.sh" ;;
+        blame)     echo "blame.sh" ;;
+        stats)     echo "stats.sh" ;;
+        age)       echo "age.sh" ;;
+        pr)        echo "pr.sh" ;;
+        patch)     echo "patch.sh" ;;
+        bisect)    echo "bisect.sh" ;;
+        *)         echo "" ;;
+    esac
+}
+
+# Help message
+show_help() {
+    echo -e "${CLR_BCYAN}gut${CLR_RESET} - A pure Bash wrapper around Git that fixes its worst UX problems.\n"
+    echo -e "Usage: ${CLR_BWHITE}gut <command> [arguments]${CLR_RESET}\n"
+    echo -e "${CLR_BWHITE}Commands:${CLR_RESET}"
+    echo -e "  ${CLR_CYAN}init${CLR_RESET}             Initialize a new Git repository."
+    echo -e "  ${CLR_CYAN}status${CLR_RESET}           Visual, labeled breakdown of current repo state."
+    echo -e "  ${CLR_CYAN}save${CLR_RESET}             Staging + committing: ${CLR_DIM}gut save [-m msg] [--all] [file...]${CLR_RESET}"
+    echo -e "  ${CLR_CYAN}undo${CLR_RESET}             Interactive reset/revert/restore."
+    echo -e "  ${CLR_CYAN}sync${CLR_RESET}             Coordinated pull/push: ${CLR_DIM}gut sync [--publish] [--force]${CLR_RESET}"
+    echo -e "  ${CLR_CYAN}branch/switch${CLR_RESET}    Branch management."
+    echo -e "  ${CLR_CYAN}integrate${CLR_RESET}        Merge branches with safety guards."
+    echo -e "  ${CLR_CYAN}replay${CLR_RESET}           Friendly interactive rebase: ${CLR_DIM}squash, reword, drop${CLR_RESET}"
+    echo -e "  ${CLR_CYAN}sub${CLR_RESET}              Submodule management."
+    echo -e "  ${CLR_CYAN}big${CLR_RESET}              Git LFS helper."
+    echo -e "  ${CLR_CYAN}rescue${CLR_RESET}           Diagnose / fix common Git pitfalls."
+    echo -e "  ${CLR_CYAN}history${CLR_RESET}          Clean, readable changelog."
+    echo -e "  ${CLR_CYAN}stash${CLR_RESET}            Save/pop/list/drop work-in-progress."
+    echo -e "  ${CLR_CYAN}alias${CLR_RESET}            Personal command shortcuts (stored in ~/.gutconfig)."
+    echo -e "  ${CLR_CYAN}compare${CLR_RESET}          Diff summary between current branch and another."
+    echo -e "  ${CLR_CYAN}tag${CLR_RESET}              Semantic version tags."
+    echo -e "  ${CLR_CYAN}protect${CLR_RESET}          Block direct pushes to protected branches."
+    echo -e "  ${CLR_CYAN}snapshot${CLR_RESET}         Timestamped quicksave to stash."
+    echo -e "  ${CLR_CYAN}whoops${CLR_RESET}           Friendly reflog browser to jump to a recent state."
+    echo -e "  ${CLR_CYAN}blame${CLR_RESET}            Annotated file history grouped by author."
+    echo -e "  ${CLR_CYAN}stats${CLR_RESET}            Contributor statistics."
+    echo -e "  ${CLR_CYAN}age${CLR_RESET}              Branch ages and ahead/behind status."
+    echo -e "  ${CLR_CYAN}pr${CLR_RESET}               Open a pull request in the browser."
+    echo -e "  ${CLR_CYAN}patch${CLR_RESET}            Export/apply commits as .patch files."
+    echo -e "  ${CLR_CYAN}bisect${CLR_RESET}           Guided binary search to find a breaking commit."
+    echo -e "  ${CLR_CYAN}git <cmd>${CLR_RESET}        Escape hatch directly to Git."
+    echo -e "\n${CLR_BWHITE}Options:${CLR_RESET}"
+    echo -e "  --help, -h        Show this help message."
+    echo -e "  --version, -v     Show version information."
+    echo -e "\n${CLR_BWHITE}Environment Variables:${CLR_RESET}"
+    echo -e "  GUT_NO_COLOR=1    Disable ANSI colors."
+    echo -e "  GUT_INSTALL_DIR   Install target for the install script."
+}
+
+# Main dispatcher
+main() {
+    local cmd="$1"
+    [[ -n "$cmd" ]] || { show_help; exit 0; }
+    shift
+
+    case "$cmd" in
+        --help|-help|-h) show_help; exit 0 ;;
+        --version|-version|-v) echo "gut v0.1.0"; exit 0 ;;
+        git) exec git "$@" ;; # Escape hatch
+        log) exec git log "$@" ;; # Direct pass-through for log
+        *)
+            local lib_file
+            lib_file=$(gut_cmd_to_lib "$cmd")
+            if [[ -n "$lib_file" && -f "${LIB_DIR}/${lib_file}" ]]; then
+                # Check for repo unless the command is exempt (e.g., init, rescue, versioning)
+                if ! gut_is_repo && [[ "$cmd" != "rescue" && "$cmd" != "init" ]]; then
+                    gut_error "Not in a Git repository."
+                    echo -e "Try: ${CLR_CYAN}gut init${CLR_RESET} or ${CLR_CYAN}gut git init${CLR_RESET}"
+                    exit 1
+                fi
+                # Execute the lib script passing sub-command and remaining args
+                # We source it to keep the environment and use the dispatcher
+                cmd_context="${cmd}" source "${LIB_DIR}/${lib_file}" "$@"
+            else
+                gut_error "Unknown command: ${cmd}"
+                echo -e "Try ${CLR_CYAN}gut --help${CLR_RESET} for available commands."
+                exit 1
+            fi
+            ;;
+    esac
+}
+
+main "$@"

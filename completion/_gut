@@ -1,0 +1,118 @@
+#compdef gut
+#
+# Zsh completion for gut
+
+_gut() {
+    local line
+    local -a commands sub_branch sub_sub sub_big sub_rescue
+
+    commands=(
+        'init:Initialize a new Git repository'
+        'status:Visual breakdown of repo state'
+        'save:Staging and committing'
+        'undo:Interactive reset/revert/restore'
+        'sync:Coordinated pull/push'
+        'branch:Manage branches'
+        'switch:Switch between branches'
+        'integrate:Merge branches with safety guards'
+        'replay:Friendly interactive rebase'
+        'sub:Submodule management'
+        'big:Git LFS helper'
+        'rescue:Diagnose and fix Git pitfalls'
+        'history:Clean changelog'
+        'log:Pass-through to git log'
+        'git:Pass-through to git'
+        'stash:Save/pop/list/drop work-in-progress'
+        'alias:Personal command shortcuts'
+        'compare:Diff summary between branches'
+        'tag:Semantic version tag management'
+        'protect:Block direct pushes to branches'
+        'snapshot:Timestamped quicksave to stash'
+        'whoops:Friendly reflog jump'
+        'blame:Annotated file history grouped by author'
+        'stats:Contributor statistics'
+        'age:Branch ages and ahead/behind status'
+        'pr:Open a pull request in the browser'
+        'patch:Export/apply commits as .patch files'
+        'bisect:Guided binary search for a breaking commit'
+    )
+
+    sub_branch=('list:List branches' 'new:Create new branch' 'delete:Delete a branch' 'rename:Rename a branch')
+    sub_sub=('list:List submodules' 'add:Add a submodule' 'update:Update all submodules' 'sync:Sync URLs' 'remove:Remove a submodule')
+    sub_big=('scan:Scan for large files' 'track:Track a file type' 'setup:Install Git LFS' 'status:Show LFS status')
+    sub_rescue=('health:Health check' 'detached:Fix detached HEAD' 'conflicts:Resolve merge conflicts' 'lost:Find lost commits' 'rebase:Fix stuck rebase' 'stash:Recover stash' 'init:Initialize a repository')
+    sub_stash=('save:Stash work' 'pop:Restore most recent stash' 'list:List stashes' 'drop:Delete a stash' 'show:Show stash contents' 'apply:Apply stash' 'clear:Clear all stashes')
+    sub_alias=('list:List aliases' 'add:Add alias' 'remove:Remove alias' 'run:Run alias')
+    sub_tag=('list:List tags' 'create:Create a tag' 'push:Push tag(s)' 'delete:Delete a tag' 'latest:Show latest tag')
+    sub_protect=('status:Show protection status' 'add:Protect a branch' 'remove:Remove protection')
+    sub_patch=('create:Export commits as patches' 'apply:Apply a patch file')
+    sub_bisect=('start:Begin bisect' 'good:Mark as good' 'bad:Mark as bad' 'skip:Skip this commit' 'abort:Abort bisect' 'log:Show bisect log')
+
+    _arguments -C \
+        '1: :->cmds' \
+        '2: :->args' \
+        '*::arg:->args'
+
+    case "$state" in
+        cmds)
+            _describe -t commands 'gut command' commands
+            ;;
+        args)
+            case "$words[1]" in
+                branch)
+                    _describe -t sub_branch 'gut branch command' sub_branch
+                    ;;
+                sub)
+                    _describe -t sub_sub 'gut sub command' sub_sub
+                    ;;
+                big)
+                    if (( CURRENT == 2 )); then
+                        _describe -t sub_big 'gut big command' sub_big
+                    else
+                        _files
+                    fi
+                    ;;
+                rescue)
+                    _describe -t sub_rescue 'gut rescue command' sub_rescue
+                    ;;
+                stash)
+                    _describe -t sub_stash 'gut stash command' sub_stash
+                    ;;
+                alias)
+                    _describe -t sub_alias 'gut alias command' sub_alias
+                    ;;
+                tag)
+                    _describe -t sub_tag 'gut tag command' sub_tag
+                    ;;
+                protect)
+                    _describe -t sub_protect 'gut protect command' sub_protect
+                    ;;
+                patch)
+                    if (( CURRENT == 2 )); then
+                        _describe -t sub_patch 'gut patch command' sub_patch
+                    else
+                        _files -g '*.patch'
+                    fi
+                    ;;
+                bisect)
+                    _describe -t sub_bisect 'gut bisect command' sub_bisect
+                    ;;
+                switch|integrate|compare)
+                    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+                        local branches
+                        branches=(${(f)"$(git branch --format='%(refname:short)' 2>/dev/null)"})
+                        compadd -a branches
+                    fi
+                    ;;
+                blame)
+                    _files
+                    ;;
+                save|undo)
+                    _files
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+_gut "$@"
