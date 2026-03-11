@@ -1,6 +1,6 @@
 site_name: gut - Git with better UX
 site_description: A pure Bash wrapper around Git. Friendlier commands, plain-English errors, and safety guardrails — with zero dependencies.
-site_url: https://serpwings.com/gut
+site_url: https://gut.serpwings.com/
 repo_url: https://github.com/serpwings/gut
 repo_name: serpwings/gut
 edit_uri: edit/main/docs/
